@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beranda - Perpus Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="toast-container"></div>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div>
+          <header class="sidebar-header"><h1>Perpus Digital</h1></header>
+          <nav class="sidebar-nav">
+            <a href="/" class="active">Beranda</a
+            ><a href="koleksi.html">Koleksi Buku</a
+            ><a href="tambah.html">Tambah Buku</a>
+          </nav>
+        </div>
+        <footer class="sidebar-footer">
+          <div class="profile-info">
+            <div class="avatar">P</div>
+            <div class="profile-name">
+              <strong>Pustakawan</strong><small>Admin</small>
+            </div>
+          </div>
+        </footer>
+      </aside>
+      <main class="main-content">
+        <button id="hamburger-btn" class="hamburger-btn">&#9776;</button>
+        <div id="overlay" class="overlay"></div>
+
+        <section class="welcome-section">
+          <h2>Selamat Datang, Pustakawan!</h2>
+          <p>Berikut adalah ringkasan status koleksi buku Anda saat ini.</p>
+        </section>
+
+        <section class="stats-grid">
+          <div class="stat-card">
+            <span id="totalBooksStat">-</span><small>Total Buku</small>
+          </div>
+          <div class="stat-card">
+            <span id="borrowedBooksStat">-</span><small>Dipinjam</small>
+          </div>
+          <div class="stat-card">
+            <span id="availableBooksStat">-</span><small>Tersedia</small>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="data.js" defer></script>
+    <script src="script.js" defer></script>
+  </body>
+</html>

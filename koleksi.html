@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Koleksi Buku - Perpus Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="toast-container"></div>
+
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div>
+          <header class="sidebar-header">
+            <h1>Perpus Digital</h1>
+          </header>
+          <nav class="sidebar-nav">
+            <a href="/">Beranda</a>
+            <a href="koleksi.html" class="active">Koleksi Buku</a>
+            <a href="tambah.html">Tambah Buku</a>
+          </nav>
+        </div>
+        <footer class="sidebar-footer">
+          <div class="profile-info">
+            <div class="avatar">P</div>
+            <div class="profile-name">
+              <strong>Pustakawan</strong><small>Admin</small>
+            </div>
+          </div>
+        </footer>
+      </aside>
+
+      <main class="main-content">
+        <button id="hamburger-btn" class="hamburger-btn">&#9776;</button>
+        <div id="overlay" class="overlay"></div>
+
+        <section class="library-section full-page">
+          <h2>Koleksi Buku</h2>
+
+          <div class="filter-bar">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Cari buku berdasarkan judul atau penulis..."
+            />
+            <select id="categoryFilter">
+              <option value="all">Semua Kategori</option>
+              <option value="Fiksi">Fiksi</option>
+              <option value="Sejarah">Sejarah</option>
+              <option value="Drama">Drama</option>
+              <option value="Sains">Sains</option>
+              <option value="Biografi">Biografi</option>
+              <option value="Teknologi">Teknologi</option>
+              <option value="Pengembangan Diri">Pengembangan Diri</option>
+            </select>
+          </div>
+
+          <div id="loading-spinner" class="loading-spinner"></div>
+          <div id="bookList"></div>
+
+          <div id="pagination-controls">
+            <button id="prev-page-btn" class="btn btn-secondary">
+              Previous
+            </button>
+            <span id="page-info">Halaman 1 dari 1</span>
+            <button id="next-page-btn" class="btn btn-secondary">Next</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Semua Modal di sini -->
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+        <header class="modal-header">
+          <h2>Edit Detail Buku</h2>
+          <button id="closeModalBtn" class="close-btn">&times;</button>
+        </header>
+        <form id="editBookForm">
+          <input type="hidden" id="editBookId" />
+          <div class="form-group">
+            <label for="editTitle">Judul Buku</label>
+            <input type="text" id="editTitle" required />
+          </div>
+          <div class="form-group">
+            <label for="editAuthor">Penulis</label>
+            <input type="text" id="editAuthor" required />
+          </div>
+          <div class="form-group">
+            <label for="editCategory">Kategori</label>
+            <select id="editCategory" required>
+              <option value="Fiksi">Fiksi</option>
+              <option value="Sejarah">Sejarah</option>
+              <option value="Drama">Drama</option>
+              <option value="Sains">Sains</option>
+              <option value="Biografi">Biografi</option>
+              <option value="Teknologi">Teknologi</option>
+              <option value="Pengembangan Diri">Pengembangan Diri</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="editYear">Tahun Terbit</label>
+            <input type="number" id="editYear" required />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+              Simpan Perubahan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="borrowModal" class="modal">
+      <div class="modal-content">
+        <header class="modal-header">
+          <h2>Pinjam Buku</h2>
+          <button id="closeBorrowModalBtn" class="close-btn">&times;</button>
+        </header>
+        <form id="borrowBookForm">
+          <input type="hidden" id="borrowBookId" />
+          <div class="form-group">
+            <label for="borrowerName">Nama Peminjam</label>
+            <input
+              type="text"
+              id="borrowerName"
+              placeholder="Masukkan nama peminjam"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="dueDate">Tanggal Jatuh Tempo</label>
+            <input type="date" id="dueDate" required />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+              Konfirmasi Peminjaman
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="historyModal" class="modal">
+      <div class="modal-content">
+        <header class="modal-header">
+          <h2>Riwayat Peminjaman</h2>
+          <button id="closeHistoryModalBtn" class="close-btn">&times;</button>
+        </header>
+        <div id="historyContent"></div>
+      </div>
+    </div>
+
+    <div id="confirmModal" class="modal">
+      <div class="modal-content modal-confirm">
+        <header class="modal-header">
+          <h2 id="confirmTitle">Konfirmasi Tindakan</h2>
+        </header>
+        <p id="confirmMessage">Apakah Anda yakin ingin melanjutkan?</p>
+        <div class="form-actions">
+          <button id="confirmYesBtn" class="btn btn-danger">
+            Ya, Lanjutkan
+          </button>
+          <button id="confirmNoBtn" class="btn btn-secondary">Batal</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="data.js" defer></script>
+    <script src="script.js" defer></script>
+  </body>
+</html>
