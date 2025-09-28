@@ -575,7 +575,7 @@ select:focus {
     box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
     top: 0;
     left: 0;
-    height: 100vh;
+    height: 100dvh;
   }
   .sidebar.open {
     transform: translateX(0);
@@ -679,3 +679,4 @@ body.modal-open {
     padding-top: 80px; /* Menyesuaikan jika ada hamburger */
   }
 }
+
